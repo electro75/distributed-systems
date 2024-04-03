@@ -6,7 +6,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'dashboard',
         component: HomeComponent,
         pathMatch: 'full'
     },

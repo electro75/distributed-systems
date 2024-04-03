@@ -34,11 +34,19 @@ export class HeaderComponent implements OnInit {
             this.activeRoute = 'login'
             break;
           default:
+            // if (!this.data.getLoginStatus()) {
+            //   this.router.navigate(['login'])
+            // }
             return;
         }
       }
+
+
     })
 
+    // if (typeof this.data.getToken() === 'string') {
+    //   this.router.navigate(['dashboard'])
+    // }
     this.selectedRegion = data.getGlobalRegion();
   }
 

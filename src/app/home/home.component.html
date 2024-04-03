@@ -1,6 +1,65 @@
 <div class="container">
-    <div class="col-md-10 col-lg-8"
-        style="border: 1px solid #D3D3D3; border-radius: 5px; padding: 30px; margin-top: 50px;">
 
+    <div class="col-md-10 col-lg-8" style="border: 1px solid #D3D3D3; border-radius: 5px; 
+                padding: 30px; margin-top: 50px;
+                display: flex; justify-content: space-between;">
+
+
+        <div
+            style="border: 1px solid #D3D3D3; border-radius: 50px; height: 100px; width: 100px; background-color: cadetblue; text-align: center; display: flex; align-items: center;justify-content: center;">
+            <span>
+                <h1 style="color: aliceblue;">S</h1>
+            </span>
+        </div>
+        <div class="col-9" style="border: 1px solid #D3D3D3; border-radius: 5px; padding: 10px">
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-3">
+                    <label for="name" style="font-weight: bold;">
+                        Name :
+                    </label>
+                </div>
+                <div class="col-8">
+                    <p>{{user.name}}</p>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-3">
+                    <label for="email" style="font-weight: bold;">
+                        Email :
+                    </label>
+                </div>
+                <div class="col-8">
+                    <p>{{user.email}}</p>
+                </div>
+            </div>
+            <div class="row" style="display: flex; align-items: center;" style="margin-top: 5px;">
+                <div class="col-3">
+                    <label for="loyalty" style="font-weight: bold;">
+                        Loyalty ID :
+                    </label>
+                </div>
+                <div class="col-8">
+                    <ng-template [ngIf]="user.is_loyalty">
+                        <p class="col-5">{{user.loyalty_card_id}}</p>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-primary">
+                                Manage
+                            </button>
+                        </div>
+                    </ng-template>
+                    <ng-template [ngIf]="!user.is_loyalty">
+                        <button type="button" class="btn btn-primary" style="width: 100px;" (click)="getLoyalty()">
+                            Register
+                        </button>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin: 10px">
+        <div class="col-md-10" style="text-align: center;">
+            <button class="btn btn-success"> Make Payment </button>
+        </div>
     </div>
 </div>
