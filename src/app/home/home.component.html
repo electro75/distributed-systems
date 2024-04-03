@@ -42,8 +42,8 @@
                 <div class="col-8">
                     <ng-template [ngIf]="user.is_loyalty">
                         <p class="col-5">{{user.loyalty_card_id}}</p>
-                        <div class="col-4">
-                            <button type="button" class="btn btn-primary">
+                        <div class="col-4" *ngIf="!isLoyaltyManage">
+                            <button type="button" class="btn btn-primary" (click)="getLoyaltyUsers()">
                                 Manage
                             </button>
                         </div>
@@ -55,11 +55,63 @@
                     </ng-template>
                 </div>
             </div>
+            <ng-template [ngIf]="isLoyaltyManage">
+                <div class="row" style="margin-top: 5px; align-items: center;">
+                    <div class="col-4">
+                        <label for="family_email_1" style="font-weight: bold;">
+                            Family Member 1 :
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="family_email_1" class="form-control" [(ngModel)]="family_emails[0]">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-4">
+                        <label for="email" style="font-weight: bold;">
+                            Family Member 2 :
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="family_email_1" class="form-control" [(ngModel)]="family_emails[1]">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-4">
+                        <label for="email" style="font-weight: bold;">
+                            Family Member 3 :
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="family_email_1" class="form-control" [(ngModel)]="family_emails[2]">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-4">
+                        <label for="email" style="font-weight: bold;">
+                            Family Member 4 :
+                        </label>
+                    </div>
+                    <div class="col-7">
+                        <input type="family_email_1" class="form-control" [(ngModel)]="family_emails[3]">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px">
+                    <button type="button" class="btn btn-primary col-2" (click)="addUsersToLoyalty()">
+                        Add
+                    </button>
+                    <button type="button" class="btn btn-danger col-4" style="margin-left: 2px;"
+                        (click)="isLoyaltyManage = false">
+                        Cancel
+                    </button>
+                </div>
+
+            </ng-template>
         </div>
     </div>
     <div class="row" style="margin: 10px">
         <div class="col-md-10" style="text-align: center;">
-            <button class="btn btn-success"> Make Payment </button>
+            <button class="btn btn-success"> Make Purchase </button>
         </div>
     </div>
 </div>

@@ -82,4 +82,13 @@ export class DataService {
   getToken() {
     return JSON.parse(localStorage.getItem('access_token') || '{}')
   }
+
+  addUsersToLoyaltyCard(data: any) {
+    return this.http.post(`${this.endpoints[this.globalRegion]}/user/addloyalty`, data, {
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`,
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+  }
 }
