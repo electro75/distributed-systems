@@ -26,15 +26,17 @@ export class PurchaseComponent {
 
   onPayment() {
     let paymentObj = {
-      loyaltycardid: this.user.loyalty_card_id,
-      coins: this.user.coins,
-      price: (8 - (this.isCoinRedeem ? this.user.coins : 0)),
+      loyalty_card_id: this.user.loyalty_card_id,
+      coins: this.isCoinRedeem ? this.user.coins : 8 * 10,
+      price: (8 - (this.isCoinRedeem ? (this.user.coins / 100) : 0)),
       timestamp: new Date().getTime(),
       type: this.isCoinRedeem ? "redeem" : "normal"
     }
 
-    this.data.makePayment(paymentObj).subscribe(res => {
-      console.log(res)
+    this.data.makePayment(paymentObj).subscribe((res: any) => {
+      if (res.message = 'Transaction successful') {
+        this.router.navigate(['dashboard'])
+      }
     })
   }
 }

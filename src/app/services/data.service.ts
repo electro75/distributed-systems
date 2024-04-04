@@ -118,4 +118,14 @@ export class DataService {
       }
     })
   }
+
+  getUserHistory(params: any) {
+    return this.http.get(`${this.endpoints[this.globalRegion]}/user/transactions/all`, {
+      params,
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`,
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+  }
 }

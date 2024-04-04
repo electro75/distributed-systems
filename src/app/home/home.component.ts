@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
   public family_emails = ['', '', '', '']
 
   public isLoyaltyManage = false
+  public showHistory = false
+
+  public userTransactions: any = []
 
   ngOnInit(): void {
     this.data.getUserDetails().subscribe((res: any) => {
@@ -62,5 +65,13 @@ export class HomeComponent implements OnInit {
   redirectToPurchase() {
     this.data.storeUser(this.user);
     this.router.navigate(['purchase'])
+  }
+
+  getHistory() {
+    this.data.getUserHistory({ loyalty_card_id: this.user.loyalty_card_id }).subscribe((res: any) => {
+      console.log(res);
+      this.showHistory = true
+      this.userTransactions = res.transactions
+    })
   }
 }

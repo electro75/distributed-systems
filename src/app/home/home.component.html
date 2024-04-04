@@ -120,7 +120,36 @@
     </div>
     <div class="row" style="margin: 10px">
         <div class="col-md-10" style="text-align: center;">
-            <button class="btn btn-success" (click)="redirectToPurchase()"> Make Purchase </button>
+            <button class="btn btn-primary" (click)="getHistory()"> Purchase History </button>
+            <button class="btn btn-success" style="margin-left: 5px;" (click)="redirectToPurchase()"> Make Purchase
+            </button>
+        </div>
+    </div>
+    <div class="row" *ngIf="showHistory">
+        <div class="col-md-10 col-lg-8" style="border: 1px solid #D3D3D3; border-radius: 5px; 
+        padding: 30px; margin-top: 50px;
+        display: flex; justify-content: space-around;">
+
+            <table style="width: 80%;">
+                <thead>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Coins
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of userTransactions">
+                        <td>{{ t.timestamp | date }}</td>
+                        <td> {{t.coins}}</td>
+                        <td> {{t.price}} </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
