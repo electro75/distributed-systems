@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private router: Router) { }
 
   public user: any = {}
 
@@ -23,13 +24,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.data.getUserDetails().subscribe((res: any) => {
-      console.log(res);
       this.user['name'] = `${res.first_name} ${res.last_name}`
       this.user['email'] = `${res.email}`
       this.user['is_loyalty'] = res.loyalty_card_id ? true : false
       this.user['loyalty_card_id'] = res.loyalty_card_id
-    })
 
+      this.data.getUserCoins({ loyalty_card_id: this.user.loyalty_card_id }).subscribe((response: any) => {
+        this.user['coins'] = response.coins
+      })
+    });
 
 
   }
@@ -45,6 +48,7 @@ export class HomeComponent implements OnInit {
 
   getLoyaltyUsers() {
     // call api
+
     this.isLoyaltyManage = true
   }
 
@@ -53,5 +57,10 @@ export class HomeComponent implements OnInit {
       this.user['loyalty_card_id'] = res.loyalty_card_id
       this.user['is_loyalty'] = true
     })
+  }
+
+  redirectToPurchase() {
+    this.data.storeUser(this.user);
+    this.router.navigate(['purchase'])
   }
 }

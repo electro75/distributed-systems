@@ -54,6 +54,33 @@ export class DataService {
     })
   }
 
+  storeUser(userObj: any) {
+    localStorage.setItem('user', JSON.stringify(userObj))
+  }
+
+  getUser() {
+    return localStorage.getItem('user')
+  }
+
+  getUserCoins(params: any) {
+    return this.http.get(`${this.endpoints[this.globalRegion]}/loyalty/coins`, {
+      params,
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`,
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+  }
+
+  makePayment(paymentObj: any) {
+    return this.http.post(`${this.endpoints[this.globalRegion]}/user/transaction`, paymentObj, {
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`,
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+  }
+
   signUserUp(userObj: any) {
     let body = {
       ...userObj,

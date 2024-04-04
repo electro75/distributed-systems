@@ -41,7 +41,16 @@
                 </div>
                 <div class="col-8">
                     <ng-template [ngIf]="user.is_loyalty">
-                        <p class="col-5">{{user.loyalty_card_id}}</p>
+                        <div class="row">
+                            <p class="col-6">
+                                {{user.loyalty_card_id}}
+                            </p>
+                            <div class="col-6">
+                                <p>
+                                    Coins Earned : {{user.coins}}
+                                </p>
+                            </div>
+                        </div>
                         <div class="col-4" *ngIf="!isLoyaltyManage">
                             <button type="button" class="btn btn-primary" (click)="getLoyaltyUsers()">
                                 Manage
@@ -111,7 +120,7 @@
     </div>
     <div class="row" style="margin: 10px">
         <div class="col-md-10" style="text-align: center;">
-            <button class="btn btn-success"> Make Purchase </button>
+            <button class="btn btn-success" (click)="redirectToPurchase()"> Make Purchase </button>
         </div>
     </div>
 </div>
